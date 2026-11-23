@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--
+  Alex Y. Zhao — personal site. One file; edit it in any text editor.
+
+  To add a publication, copy one <div class="item"> block inside <section id="publications">:
+      <div class="item">
+        <div class="t">Title of the paper</div>
+        <div class="a">Authors. <span class="v">Journal</span>, vol(issue), pages, year.</div>
+      </div>
+  To add a talk, copy one <div class="row"> block inside <section id="talks">.
+  Colors live in the :root block at the top of <style>.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alex Y. Zhao</title>
+<meta name="description" content="Alex Y. Zhao, PhD student in Computational Biology at UC Berkeley. Stability-aware machine learning and experimental design for biological sequence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f9f8f6; --ink:#1c1b19; --muted:#5a5752; --faint:#9c9892;
+  --line:#e5e3df; --accent:#4a575d; --accent-ink:#333d41;
+  /* accent: sage. --blue is kept here but unused; swap it back in if you want it. */
+  --sage:#6c8166; --sage-soft:#e2e9dd; --sage-mid:#9fae99; --blue:#5a7490; --blue-soft:#dde6ee;
+}
+::selection{background:var(--sage-soft);color:var(--ink)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:3px;z-index:5;
+  background:linear-gradient(90deg,var(--sage),#9cae96 50%,var(--sage))}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{display:grid;grid-template-columns:286px 1fr;max-width:1160px;margin:0 auto;min-height:100vh}
+
+/* Sidebar */
+aside{position:sticky;top:0;height:100vh;padding:72px 34px;display:flex;flex-direction:column}
+aside::after{content:"";position:absolute;top:0;right:0;width:1px;height:100%;
+  background:linear-gradient(180deg,var(--sage) 0%,#9fae99 28%,#d2d6cf 52%,#9fae99 76%,var(--sage) 100%);opacity:.85}
+.photo{width:104px;height:104px;border-radius:4px;margin-bottom:24px;object-fit:cover;
+  background:linear-gradient(145deg,var(--sage-soft),#eef1ea 100%);border:1px solid #d3d9d1;display:flex;align-items:center;justify-content:center;
+  color:#7d8a81;font-size:26px;font-weight:500;letter-spacing:1px}
+aside h1{font-size:21px;font-weight:600;letter-spacing:-.2px;line-height:1.3}
+.role{color:var(--muted);font-size:13.5px;margin:7px 0 30px;line-height:1.5}
+nav a{display:block;font-size:13.5px;color:var(--muted);text-decoration:none;padding:5px 0;transition:color .15s}
+nav a:hover{color:var(--sage)}
+nav a.act{color:var(--sage);font-weight:600;position:relative}
+nav a.act::before{content:"";position:absolute;left:-14px;top:50%;transform:translateY(-50%);
+  width:5px;height:5px;border-radius:50%;background:var(--sage)}
+.soc{margin-top:26px;font-size:13px;line-height:1.9}
+.soc a{display:block;color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;width:fit-content}
+.soc a:hover{color:var(--sage);border-bottom-color:var(--sage)}
+.foot{margin-top:auto;font-size:11.5px;color:var(--faint)}
+
+/* Main */
+main{padding:72px 60px 100px;max-width:800px}
+section{margin-bottom:58px;scroll-margin-top:32px}
+h2{font-size:11.5px;text-transform:uppercase;letter-spacing:1.5px;color:var(--sage);font-weight:600;
+   margin-bottom:16px;padding-bottom:9px;border-bottom:1px solid var(--line);position:relative}
+h2::after{content:"";position:absolute;left:0;bottom:-1px;width:72px;height:2px;
+  background:linear-gradient(90deg,var(--sage),var(--sage-mid))}
+p{font-size:15.5px;color:var(--muted);margin-bottom:13px;max-width:70ch}
+p strong{color:var(--ink);font-weight:600}
+p em{font-style:italic}
+.pcs{color:var(--sage);font-weight:600;font-style:normal}
+.intro p{font-size:16px}
+.intro p:first-child{color:var(--ink)}
+.intro p.interests{font-size:14px;color:var(--accent-ink);margin:28px 0 0;padding:14px 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);line-height:1.95;max-width:none}
+.interests b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:1.4px;
+  color:var(--sage);font-weight:600;margin-bottom:5px}
+.interests span{white-space:nowrap;font-weight:600}
+.interests span:not(:last-child)::after{content:" ·";color:var(--sage);font-weight:400;margin-left:4px}
+
+.item{padding:15px 0;border-bottom:1px solid var(--line)}
+.item:last-of-type{border-bottom:none}
+.item .t{font-weight:600;font-size:15px;line-height:1.5;color:var(--ink)}
+.item .a{font-size:13.5px;color:var(--muted);margin-top:3px}
+.item .a b{color:var(--ink);font-weight:600}
+.item .v{font-style:italic;color:var(--sage)}
+.item .st{font-style:italic;color:var(--sage)}
+.item p{font-size:14.5px;margin:7px 0 0}
+
+.row{display:grid;grid-template-columns:132px 1fr;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.row:last-child{border-bottom:none}
+.row .d{color:var(--sage);font-weight:500;font-size:13px;padding-top:1.5px}
+.row .w{font-weight:600}
+.row .s{color:var(--muted);font-size:13.5px;margin-top:1px}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr}
+  aside{position:static;height:auto;padding:40px 24px 26px;border-right:none;border-bottom:1px solid var(--line)}
+  nav{display:flex;flex-wrap:wrap;gap:2px 18px}
+  .soc{display:flex;gap:16px;margin-top:18px}
+  .foot{display:none}
+  main{padding:40px 24px 72px}
+  .row{grid-template-columns:1fr;gap:1px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside>
+    <img class="photo" src="photo.jpg" alt="Alex Y. Zhao" width="520" height="520">
+    <h1>Alex Y. Zhao</h1>
+    <div class="role">PhD Student, Computational Biology<br>University of California, Berkeley</div>
+    <nav>
+      <a href="#about" class="act">About</a>
+      <a href="#talks">Talks &amp; Posters</a>
+      <a href="#publications">Publications</a>
+    </nav>
+    <div class="soc">
+      <a href="mailto:alex_zhao@berkeley.edu">alex_zhao@berkeley.edu</a>
+      <a href="cv.pdf">Curriculum Vitae</a>
+      <a href="https://www.linkedin.com/in/alex-zhao-984aa7105/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="foot">Last updated November 2026</div>
+  </aside>
+
+  <main>
+    <section id="about" class="intro">
+      <p>I am a PhD student in Computational Biology at the University of California, Berkeley, advised by Prof. <span style="color:var(--sage);font-weight:600">Nilah Ioannidis</span> and <a href="https://binyu.stat.berkeley.edu/">Prof. Bin Yu</a>. My research focuses on developing <span style="color:var(--sage);font-weight:600">reliable and interpretable deep learning models for genomics</span>, with applications in molecular and physiological phenotype prediction, variant effect prediction, and regulatory DNA sequence design. More broadly, I am interested in using these models to better understand gene regulation and inform therapeutic development.</p>
+      <p>Prior to Berkeley, I was a Senior Assistant Scientist at Regeneron Pharmaceuticals. I hold an M.S. in Computational Biology from Carnegie Mellon University, where I was honored to work with and be advised by Prof. Russell Schwartz, and a B.A. in Mathematics and Statistics from Grinnell College.</p>
+      <p class="interests"><b>Research interests</b><span>Deep Learning for Genomics</span> <span>Regulatory Genomics</span> <span>Variant Effect Prediction</span> <span>Regulatory Sequence Design</span> <span>Interpretable Machine Learning</span> <span>Uncertainty Quantification</span></p>
+    </section>
+
+    <section id="talks">
+      <h2>Talks &amp; Posters</h2>
+      <div class="row"><div class="d">2026</div><div><div class="w">Stability-aware transfer learning for compact and cell-type-specific kidney regulatory element design</div><div class="s">Machine Learning in Computational Biology (MLCB), poster</div></div></div>
+      <div class="row"><div class="d">2026</div><div><div class="w">Evaluation of structural variant effect prediction with AlphaGenome</div><div class="s">Telomere-to-Telomere (T2T) Consortium Meeting, Santa Cruz, poster</div></div></div>
+      <div class="row"><div class="d">2025</div><div><div class="w">Stabilizing protein fitness predictors via the PCS framework</div><div class="s">ICML EXAIT workshop, poster</div></div></div>
+      <div class="row"><div class="d">2024</div><div><div class="w">Spatial transcriptomics in a kidney Alport disease model</div><div class="s">Regeneron Science Poster Session</div></div></div>
+    </section>
+
+    <section id="publications">
+      <h2>Publications</h2>
+      <div class="item">
+        <div class="t">Interplay of procoagulatory and neutrophil-derived anticoagulatory proteins in C1q-NET–driven blood coagulation</div>
+        <div class="a">Thomas M., Frleta D., Lai K., O’Brien J., Patel A. K., <b>Zhao Y.</b>, … Devalaraja-Narashimha K. B. <span class="v">Blood</span>, 146(24), 2993–3002, 2025.</div>
+      </div>
+      <div class="item">
+        <div class="t">Perturbed liver gene zonation in a mouse model of non-alcoholic steatohepatitis</div>
+        <div class="a">Zhou Y., <b>Zhao Y.</b>, Carbonaro M., Chen H., Germino M., Adler C., … Cheng X. <span class="v">Metabolism</span>, 154, 155830, 2024.</div>
+      </div>
+      <div class="item">
+        <div class="t">Activin E–ACVR1C cross talk controls energy storage via suppression of adipose lipolysis in mice</div>
+        <div class="a">Adam R. C., Pryce D. S., Lee J. S., <b>Zhao Y.</b>, et al. <span class="v">PNAS</span>, 120(32), e2309967120, 2023.</div>
+      </div>
+      <div class="item">
+        <div class="t">Assessing the contribution of tumor mutational phenotypes to cancer progression risk</div>
+        <div class="a">Tao Y., Rajaraman A., Cui X., Chen H., <b>Zhao Y.</b>, et al. <span class="v">PLoS Computational Biology</span>, 17(3), e1008777, 2021.</div>
+      </div>
+    </section>
+  </main>
+</div>
+<script>
+const links=[...document.querySelectorAll('nav a')];
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+  links.forEach(l=>l.classList.toggle('act',l.getAttribute('href')==='#'+e.target.id));}})},
+  {rootMargin:'-25% 0px -65% 0px'});
+document.querySelectorAll('main section').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
